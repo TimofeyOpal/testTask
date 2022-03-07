@@ -1,0 +1,31 @@
+1) SELECT dbo.Director.id,dbo.Director.Name
+FROM dbo.Director
+WHERE NOT EXISTS
+(
+SELECT NULL
+FROM dbo.Movie
+WHERE dbo.Movie.DirectorId = dbo.Director.id
+)
+
+
+
+2)SELECT Top(1) Movie.Title
+FROM Movie
+INNER JOIN MovieActor ON MovieActor.MovieId = Movie.id
+GROUP BY Movie.Title
+ORDER BY COUNT(*) DESC
+
+
+3)select Name
+from MovieDB.dbo.Actor
+inner join dbo.MovieActor
+on dbo.Actor.id = dbo.MovieActor.ActorId
+where dbo.MovieActor.MovieId = 1
+EXCEPT
+select Name
+from MovieDB.dbo.Actor
+inner join dbo.MovieActor
+on dbo.Actor.id = dbo.MovieActor.ActorId
+where dbo.MovieActor.MovieId = 2
+
+
